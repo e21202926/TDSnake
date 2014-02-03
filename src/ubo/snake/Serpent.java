@@ -14,6 +14,7 @@ public class Serpent {
       private int eatCount;
       private int moveCounter;
       
+	//Crée un serpent
       public Serpent() {
             this.list = new LinkedList<Case>();
             this.list.add(new Case(14, 15));
@@ -22,10 +23,12 @@ public class Serpent {
             this.direction = Direction.VERS_LA_GAUCHE;
       }
       
+	//Choisit la direction
       public void setDemandeClavier(Direction demande) {
           this.demande = demande;
     }
       
+	//Tourne le serpent
       private void tourner() {
           if (this.demande != null) { // une touche à été pressée
                 // le serpent va vers le haut ou le bas
@@ -59,6 +62,7 @@ public class Serpent {
           }
     }
       
+	//Avance le serpent
       private void avance() {
           // ajoute en tête de liste la case sur laquelle
           // le serpent doit se déplacer
@@ -67,6 +71,7 @@ public class Serpent {
           this.list.removeLast();
     }
       
+	//Rends la prochaine case en fonction de la direction du serpent
       private Case getNextcase() {
           Case tete = this.list.getFirst();
           switch (this.direction) {
@@ -82,19 +87,23 @@ public class Serpent {
           return null;
     }
       
+	//Inidique si le serpent peut avancer
       private boolean peutAvancer() {
     	  Case nextCase = getNextcase();
           return nextCase.estValide() && !this.list.contains(nextCase);
     }
       
+	//Indique si le serpent est mort
       public boolean estMort() {
           return this.estMort;
     }
      
+	//Indique si le serpent peut manger
       private boolean peutManger(Grenouille grenouille) {
           return grenouille.equals(getNextcase());
     }
       
+	//Fait manger le serpent
       private void mange() {
           // ajoute en tête de liste la case sur laquelle
           // le serpent doit se déplacer
@@ -154,7 +163,7 @@ public class Serpent {
           }
       }
       
-      
+      //Affiche le serpent
       public void affichage(Graphics g) {
     	  // activer l'anti-aliasing du dessin
           Graphics2D g2 = (Graphics2D) g;
